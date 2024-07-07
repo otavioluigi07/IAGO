@@ -17,6 +17,14 @@ def create_user():
     )
     return jsonify(result)
 
+@app.route('/users', methods=['GET'])
+def get_all_users():
+    try:
+        users = UserService.get_all_users()
+        return jsonify(users)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     result = UserService.get_user(user_id)

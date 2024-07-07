@@ -25,6 +25,15 @@ class UserService:
             return {"error": str(e)}
 
     @staticmethod
+    def get_all_users():
+        try:
+            result = db.session.execute(user.select()).fetchall()
+            users = [dict(row) for row in result]
+            return users
+        except SQLAlchemyError as e:
+            return {"error": str(e)}
+        
+    @staticmethod
     def get_user(user_id):
         try:
             result = db.session.execute(user.select().where(user.c.id == user_id)).fetchone()

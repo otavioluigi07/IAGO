@@ -3,13 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
+from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:099403bo@localhost/iago'  # Substitua com suas credenciais
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:0994@localhost/iago'  # Substitua com suas credenciais
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-app.app_context().push()
+migrate = Migrate(app, db)
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -51,3 +52,6 @@ class Historic(db.Model):
     total_price = db.Column(Float, nullable=False)
     payment_method = db.Column(String, nullable=False)
     status = db.Column(Boolean, nullable=False)
+
+if __name__ == "__main__":
+    app.run(debug=True)
