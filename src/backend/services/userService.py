@@ -4,7 +4,6 @@ from models.userModel import user
 from . import db
 
 class UserService:
-    
     @staticmethod
     def create_user(name, email, occupation, cell, age, gender, subscription_id, role):
         try:
@@ -15,7 +14,7 @@ class UserService:
                 cell=cell,
                 age=age,
                 gender=gender,
-                subscription_id=subscription_id,
+                subscription_id= 0,
                 role=role
             )
             db.session.execute(new_user)

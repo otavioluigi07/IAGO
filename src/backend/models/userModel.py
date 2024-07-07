@@ -9,7 +9,7 @@ user = Table(
     Column("email", String, unique=True),
     Column("occupation", String),
     Column("cell", String),
-    Column("age", String),
+    Column("age", int),
     Column("gender", String),
     Column("subscription_id", Integer, ForeignKey("subscription.id")),  # Chave estrangeira da subscription
     Column("role", String),
