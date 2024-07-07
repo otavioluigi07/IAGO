@@ -4,6 +4,7 @@ from models.userModel import user
 from . import db
 
 class UserService:
+    
     @staticmethod
     def create_user(name, email, occupation, cell, age, gender, subscription_id, role):
         try:
