@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from services.userService import UserService
 
-user_bp = Blueprint('user_bp', __name__)
+user_bp = Blueprint('user', __name__, url_prefix='/users')
 
 @user_bp.route('/', methods=['POST'])
 def create_user():
@@ -51,3 +51,4 @@ def update_user(user_id):
 def delete_user(user_id):
     result = UserService.delete_user(user_id)
     return jsonify(result)
+

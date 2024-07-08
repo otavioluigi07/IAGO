@@ -1,7 +1,6 @@
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import Session
-from models.userModel import User
 from app import db
+from models.userModel import User
 
 class UserService:
     @staticmethod
