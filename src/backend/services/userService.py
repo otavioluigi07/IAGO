@@ -1,10 +1,10 @@
 from sqlalchemy.exc import SQLAlchemyError
-from app import db
 from models.userModel import User
 
 class UserService:
     @staticmethod
     def create_user(name, email, occupation, cell, age, gender, subscription_id, role):
+        from database.database import db  # Importação localizada
         try:
             new_user = User(
                 name=name,
@@ -25,6 +25,7 @@ class UserService:
 
     @staticmethod
     def get_all_user():
+        from database.database import db  # Importação localizada
         try:
             users = User.query.all()
             return [user.to_dict() for user in users]
@@ -33,6 +34,7 @@ class UserService:
 
     @staticmethod
     def get_user(user_id):
+        from database.database import db  # Importação localizada
         try:
             user = User.query.get(user_id)
             if user:
@@ -44,6 +46,7 @@ class UserService:
 
     @staticmethod
     def update_user(user_id, name, email, occupation, cell, age, gender, subscription_id, role):
+        from database.database import db  # Importação localizada
         try:
             user = User.query.get(user_id)
             if user:
@@ -65,6 +68,7 @@ class UserService:
 
     @staticmethod
     def delete_user(user_id):
+        from database.database import db  # Importação localizada
         try:
             user = User.query.get(user_id)
             if user:
