@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 from flask_sqlalchemy import SQLAlchemy
-from app import app, db
+from backend.app import app, db
 from backend.services.subscriptionService import SubscriptionService
 from backend.models.subscriptionModel import Subscription
 

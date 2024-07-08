@@ -5,6 +5,7 @@ from backend.app import app, db
 from backend.services.userService import UserService
 from backend.models.userModel import User
 
+
 class TestUserService(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

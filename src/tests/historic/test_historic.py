@@ -2,8 +2,8 @@ import unittest
 from unittest.mock import MagicMock
 from flask_sqlalchemy import SQLAlchemy
 from app import app, db
-from services.historicService import HistoricService
-from models.historicModel import Historic
+from backend.services.historicService import HistoricService
+from backend.models.historicModel import Historic
 
 class TestHistoricService(unittest.TestCase):
 

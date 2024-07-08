@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import MagicMock
 from flask_sqlalchemy import SQLAlchemy
-from app import app, db
-from services.modelService import ModelService
-from models.modelModel import Model
+from backend.app import app, db
+from backend.services.modelService import ModelService
+from backend.models.modelModel import Model
 
 class TestModelService(unittest.TestCase):
 
