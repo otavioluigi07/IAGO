@@ -25,7 +25,7 @@ class UserService:
             return {"error": str(e)}
 
     @staticmethod
-    def get_all_users():
+    def get_all_user():
         try:
             users = User.query.all()
             return [user.to_dict() for user in users]

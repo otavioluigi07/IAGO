@@ -19,9 +19,12 @@ def get_model(model_id):
     return jsonify(result)
 
 @model_bp.route('/', methods=['GET'])
-def get_model(model_id):
-    result = ModelService.get_all_models()
-    return jsonify(result)
+def get_all_model():
+    try:
+        models = ModelService.get_all_model()
+        return jsonify(models)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 @model_bp.route('/<int:model_id>', methods=['PUT'])
 def update_model(model_id):

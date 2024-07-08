@@ -2,6 +2,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from models.subscriptionModel import Subscription
 from app import db
 
+
 class SubscriptionService:
     @staticmethod
     def create_subscription(name, price, model, active):
@@ -27,6 +28,14 @@ class SubscriptionService:
                 return dict(result)
             else:
                 return {"error": "Subscription not found"}
+        except SQLAlchemyError as e:
+            return {"error": str(e)}
+            
+    @staticmethod
+    def get_all_subscription():
+        try:
+            subs = Subscription.query.all()
+            return [sub.to_dict() for sub in subs]
         except SQLAlchemyError as e:
             return {"error": str(e)}
 

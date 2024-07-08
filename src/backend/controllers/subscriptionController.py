@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 
 subscription_bp = Blueprint('subscription_bp', __name__)
 
-@subscription_bp.route('/subscriptions', methods=['POST'])
+@subscription_bp.route('/', methods=['POST'])
 def create_subscription():
     data = request.json
     result = SubscriptionService.create_subscription(
@@ -14,12 +14,20 @@ def create_subscription():
     )
     return jsonify(result)
 
-@subscription_bp.route('/subscriptions/<int:subscription_id>', methods=['GET'])
+@subscription_bp.route('/<int:subscription_id>', methods=['GET'])
 def get_subscription(subscription_id):
     result = SubscriptionService.get_subscription(subscription_id)
     return jsonify(result)
 
-@subscription_bp.route('/subscriptions/<int:subscription_id>', methods=['PUT'])
+@subscription_bp.route('/', methods=['GET'])
+def get_all_subscription():
+    try:
+        subs = SubscriptionService.get_all_subscription()
+        return jsonify(subs)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+@subscription_bp.route('/<int:subscription_id>', methods=['PUT'])
 def update_subscription(subscription_id):
     data = request.json
     result = SubscriptionService.update_subscription(
@@ -31,7 +39,7 @@ def update_subscription(subscription_id):
     )
     return jsonify(result)
 
-@subscription_bp.route('/subscriptions/<int:subscription_id>', methods=['DELETE'])
+@subscription_bp.route('/<int:subscription_id>', methods=['DELETE'])
 def delete_subscription(subscription_id):
     result = SubscriptionService.delete_subscription(subscription_id)
     return jsonify(result)

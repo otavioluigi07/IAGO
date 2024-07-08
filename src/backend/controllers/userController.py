@@ -21,7 +21,7 @@ def create_user():
 @user_bp.route('/', methods=['GET'])
 def get_all_users():
     try:
-        users = UserService.get_all_users()
+        users = UserService.get_all_user()
         return jsonify(users)
     except Exception as e:
         return jsonify({"error": str(e)})

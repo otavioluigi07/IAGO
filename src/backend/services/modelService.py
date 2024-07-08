@@ -30,7 +30,7 @@ class ModelService:
             return {"error": str(e)}
         
     @staticmethod
-    def get_all_models():
+    def get_all_model():
         try:
             models = Model.query.all()
             return [model.to_dict() for model in models]
