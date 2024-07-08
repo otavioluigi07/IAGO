@@ -1,4 +1,3 @@
-from . import app
 from services.subscriptionService import SubscriptionService
 from flask import Blueprint, request, jsonify
 

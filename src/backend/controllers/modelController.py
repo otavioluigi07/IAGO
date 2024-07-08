@@ -1,10 +1,9 @@
-from . import app
 from services.modelService import ModelService
 from flask import Blueprint, request, jsonify
 
 model_bp = Blueprint('model_bp', __name__)
 
-@model_bp.route('/models', methods=['POST'])
+@model_bp.route('/', methods=['POST'])
 def create_model():
     data = request.json
     result = ModelService.create_model(
@@ -14,12 +13,17 @@ def create_model():
     )
     return jsonify(result)
 
-@model_bp.route('/models/<int:model_id>', methods=['GET'])
+@model_bp.route('/<int:model_id>', methods=['GET'])
 def get_model(model_id):
     result = ModelService.get_model(model_id)
     return jsonify(result)
 
-@model_bp.route('/models/<int:model_id>', methods=['PUT'])
+@model_bp.route('/', methods=['GET'])
+def get_model(model_id):
+    result = ModelService.get_all_models()
+    return jsonify(result)
+
+@model_bp.route('/<int:model_id>', methods=['PUT'])
 def update_model(model_id):
     data = request.json
     result = ModelService.update_model(
@@ -30,7 +34,7 @@ def update_model(model_id):
     )
     return jsonify(result)
 
-@model_bp.route('/models/<int:model_id>', methods=['DELETE'])
+@model_bp.route('/<int:model_id>', methods=['DELETE'])
 def delete_model(model_id):
     result = ModelService.delete_model(model_id)
     return jsonify(result)

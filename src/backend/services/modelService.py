@@ -1,17 +1,17 @@
 from sqlalchemy.exc import SQLAlchemyError
-from models.modelModel import model
-from . import db
+from models.modelModel import Model
+from app import db
 
 class ModelService:
     @staticmethod
     def create_model(name, max_token, min_token):
         try:
-            new_model = model.insert().values(
+            new_model = Model(
                 name=name,
                 max_token=max_token,
                 min_token=min_token
             )
-            db.session.execute(new_model)
+            db.session.add(new_model)
             db.session.commit()
             return {"message": "Model created successfully"}
         except SQLAlchemyError as e:
@@ -21,11 +21,19 @@ class ModelService:
     @staticmethod
     def get_model(model_id):
         try:
-            result = db.session.execute(model.select().where(model.c.id == model_id)).fetchone()
-            if result:
-                return dict(result)
+            model = Model.query.get(model_id)
+            if model:
+                return model.to_dict()
             else:
                 return {"error": "Model not found"}
+        except SQLAlchemyError as e:
+            return {"error": str(e)}
+        
+    @staticmethod
+    def get_all_models():
+        try:
+            models = Model.query.all()
+            return [model.to_dict() for model in models]
         except SQLAlchemyError as e:
             return {"error": str(e)}
 
@@ -34,7 +42,7 @@ class ModelService:
         try:
             update_values = {key: value for key, value in kwargs.items() if value is not None}
             if update_values:
-                db.session.execute(model.update().where(model.c.id == model_id).values(**update_values))
+                Model.query.filter_by(id=model_id).update(update_values)
                 db.session.commit()
                 return {"message": "Model updated successfully"}
             else:
@@ -46,9 +54,13 @@ class ModelService:
     @staticmethod
     def delete_model(model_id):
         try:
-            db.session.execute(model.delete().where(model.c.id == model_id))
-            db.session.commit()
-            return {"message": "Model deleted successfully"}
+            model = Model.query.get(model_id)
+            if model:
+                db.session.delete(model)
+                db.session.commit()
+                return {"message": "Model deleted successfully"}
+            else:
+                return {"error": "Model not found"}
         except SQLAlchemyError as e:
             db.session.rollback()
             return {"error": str(e)}

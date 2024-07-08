@@ -1,12 +1,12 @@
 from sqlalchemy.exc import SQLAlchemyError
-from models.subscriptionModel import subscription
-from . import db
+from models.subscriptionModel import Subscription
+from app import db
 
 class SubscriptionService:
     @staticmethod
     def create_subscription(name, price, model, active):
         try:
-            new_subscription = subscription.insert().values(
+            new_subscription = Subscription.insert().values(
                 name=name,
                 price=price,
                 model=model,
@@ -22,7 +22,7 @@ class SubscriptionService:
     @staticmethod
     def get_subscription(subscription_id):
         try:
-            result = db.session.execute(subscription.select().where(subscription.c.id == subscription_id)).fetchone()
+            result = db.session.execute(Subscription.select().where(Subscription.c.id == subscription_id)).fetchone()
             if result:
                 return dict(result)
             else:
@@ -35,7 +35,7 @@ class SubscriptionService:
         try:
             update_values = {key: value for key, value in kwargs.items() if value is not None}
             if update_values:
-                db.session.execute(subscription.update().where(subscription.c.id == subscription_id).values(**update_values))
+                db.session.execute(Subscription.update().where(Subscription.c.id == subscription_id).values(**update_values))
                 db.session.commit()
                 return {"message": "Subscription updated successfully"}
             else:
@@ -47,7 +47,7 @@ class SubscriptionService:
     @staticmethod
     def delete_subscription(subscription_id):
         try:
-            db.session.execute(subscription.delete().where(subscription.c.id == subscription_id))
+            db.session.execute(Subscription.delete().where(Subscription.c.id == subscription_id))
             db.session.commit()
             return {"message": "Subscription deleted successfully"}
         except SQLAlchemyError as e:

@@ -1,5 +1,5 @@
-from . import db
 from sqlalchemy import Column, Integer, String, ForeignKey
+from app import db
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -13,3 +13,16 @@ class User(db.Model):
     gender = db.Column(String)
     subscription_id = db.Column(Integer, ForeignKey('subscription.id'))
     role = db.Column(String)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'occupation': self.occupation,
+            'cell': self.cell,
+            'age': self.age,
+            'gender': self.gender,
+            'subscription_id': self.subscription_id,
+            'role': self.role
+        }
