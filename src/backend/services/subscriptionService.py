@@ -3,16 +3,16 @@ from models.subscriptionModel import Subscription
 
 class SubscriptionService:
     @staticmethod
-    def create_subscription(name, price, model, active):
+    def create_subscription(name, price, model_id, active):
         from database.database import db  # Importação localizada
         try:
-            new_subscription = Subscription.insert().values(
+            new_subscription = Subscription(
                 name=name,
                 price=price,
-                model=model,
+                model_id=model_id,
                 active=active
             )
-            db.session.execute(new_subscription)
+            db.session.add(new_subscription)
             db.session.commit()
             return {"message": "Subscription created successfully"}
         except SQLAlchemyError as e:
@@ -23,9 +23,9 @@ class SubscriptionService:
     def get_subscription(subscription_id):
         from database.database import db  # Importação localizada
         try:
-            result = db.session.execute(Subscription.select().where(Subscription.c.id == subscription_id)).fetchone()
+            result = Subscription.query.get(subscription_id)
             if result:
-                return dict(result)
+                return result.to_dict()
             else:
                 return {"error": "Subscription not found"}
         except SQLAlchemyError as e:
@@ -39,14 +39,14 @@ class SubscriptionService:
             return [sub.to_dict() for sub in subs]
         except SQLAlchemyError as e:
             return {"error": str(e)}
-
+        
     @staticmethod
     def update_subscription(subscription_id, **kwargs):
         from database.database import db  # Importação localizada
         try:
             update_values = {key: value for key, value in kwargs.items() if value is not None}
             if update_values:
-                db.session.execute(Subscription.update().where(Subscription.c.id == subscription_id).values(**update_values))
+                Subscription.query.filter_by(id=subscription_id).update(update_values)
                 db.session.commit()
                 return {"message": "Subscription updated successfully"}
             else:

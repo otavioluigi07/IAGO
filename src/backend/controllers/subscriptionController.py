@@ -9,7 +9,7 @@ def create_subscription():
     result = SubscriptionService.create_subscription(
         name=data.get('name'),
         price=data.get('price'),
-        model=data.get('model'),
+        model_id=data.get('model_id'),
         active=data.get('active')
     )
     return jsonify(result)
@@ -34,7 +34,7 @@ def update_subscription(subscription_id):
         subscription_id,
         name=data.get('name'),
         price=data.get('price'),
-        model=data.get('model'),
+        model_id=data.get('model_id'),
         active=data.get('active')
     )
     return jsonify(result)

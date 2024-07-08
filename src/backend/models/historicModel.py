@@ -16,12 +16,10 @@ class Historic(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'occupation': self.occupation,
-            'cell': self.cell,
-            'age': self.age,
-            'gender': self.gender,
+            'user_id': self.user_id,
+            'purchase_date':self.purchase_date,
             'subscription_id': self.subscription_id,
-            'role': self.role
+            'total_price': self.total_price,
+            'payment_method': self.payment_method,
+            'status': self.status
         }

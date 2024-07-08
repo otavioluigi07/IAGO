@@ -15,7 +15,6 @@ class Subscription(db.Model):
             'id': self.id,
             'name': self.name,
             'price': self.price,
-            'occupation': self.occupation,
             'model_id': self.model_id,
             'activate': self.active
         }
