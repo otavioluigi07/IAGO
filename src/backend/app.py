@@ -1,8 +1,5 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, Boolean
-from sqlalchemy.orm import relationship
-from datetime import datetime
 from flask_migrate import Migrate
 
 app = Flask(__name__)
@@ -12,46 +9,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-class User(db.Model):
-    __tablename__ = 'user'
+from models.userModel import User
+from models.subscriptionModel import Subscription
+from models.modelModel import Model
+from models.historicModel import Historic
 
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(String)
-    email = db.Column(String, unique=True)
-    occupation = db.Column(String)
-    cell = db.Column(String)
-    age = db.Column(Integer)
-    gender = db.Column(String)
-    subscription_id = db.Column(Integer, ForeignKey('subscription.id'))
-    role = db.Column(String)
+from controllers.historicController import historic_bp
+from controllers.modelController import model_bp
+from controllers.subscriptionController import subscription_bp
+from controllers.userController import user_bp
 
-class Subscription(db.Model):
-    __tablename__ = 'subscription'
-
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(String, unique=True)
-    price = db.Column(Integer)
-    model_id = db.Column(Integer, ForeignKey('model.id'))
-    active = db.Column(Boolean)
-
-class Model(db.Model):
-    __tablename__ = 'model'
-
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(String, unique=True)
-    max_token = db.Column(Integer)
-    min_token = db.Column(Integer)
-
-class Historic(db.Model):
-    __tablename__ = 'historic'
-    
-    id = db.Column(Integer, primary_key=True)
-    user_id = db.Column(Integer, ForeignKey('user.id'), nullable=False)
-    purchase_date = db.Column(DateTime, default=datetime.utcnow, nullable=False)
-    subscription_id = db.Column(Integer, ForeignKey('subscription.id'), nullable=False)
-    total_price = db.Column(Float, nullable=False)
-    payment_method = db.Column(String, nullable=False)
-    status = db.Column(Boolean, nullable=False)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+app.register_blueprint(user_bp, url_prefix='/users')
+app.register_blueprint(subscription_bp, url_prefix='/subscriptions')
+app.register_blueprint(model_bp, url_prefix='/models')
+app.register_blueprint(historic_bp, url_prefix='/historics')

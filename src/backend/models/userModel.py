@@ -1,16 +1,15 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey
-from database.db import metadata
+from . import db
+from sqlalchemy import Column, Integer, String, ForeignKey
 
-user = Table(
-    "user",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("name", String),
-    Column("email", String, unique=True),
-    Column("occupation", String),
-    Column("cell", String),
-    Column("age", int),
-    Column("gender", String),
-    Column("subscription_id", Integer, ForeignKey("subscription.id")),  # Chave estrangeira da subscription
-    Column("role", String),
-)
+class User(db.Model):
+    __tablename__ = 'user'
+
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(String)
+    email = db.Column(String, unique=True)
+    occupation = db.Column(String)
+    cell = db.Column(String)
+    age = db.Column(Integer)
+    gender = db.Column(String)
+    subscription_id = db.Column(Integer, ForeignKey('subscription.id'))
+    role = db.Column(String)

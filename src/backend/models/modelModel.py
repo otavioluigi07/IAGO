@@ -1,11 +1,10 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey
-from database.db import metadata
+from . import db
+from sqlalchemy import Column, Integer, String
 
-model = Table(
-    "model",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("name", String, unique=True),
-    Column("max_token", int),
-    Column("min_token", int),
-)
+class Model(db.Model):
+    __tablename__ = 'model'
+
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(String, unique=True)
+    max_token = db.Column(Integer)
+    min_token = db.Column(Integer)

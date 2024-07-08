@@ -1,15 +1,14 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, DateTime, Float, create_engine, MetaData
+from . import db
+from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean, ForeignKey
 from datetime import datetime
-from database.db import metadata
 
-historic = Table(
-    "historic",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("user_id", Integer, ForeignKey("user.id"), nullable=False),
-    Column("purchase_date", DateTime, default=datetime.utcnow, nullable=False),
-    Column("subscription_id", Integer, ForeignKey("subscription.id"), nullable=False),
-    Column("total_price", Float, nullable=False),
-    Column("payment_method", String, nullable=False),
-    Column("status", bool, nullable=False)
-)
+class Historic(db.Model):
+    __tablename__ = 'historic'
+
+    id = db.Column(Integer, primary_key=True)
+    user_id = db.Column(Integer, ForeignKey('user.id'), nullable=False)
+    purchase_date = db.Column(DateTime, default=datetime.utcnow, nullable=False)
+    subscription_id = db.Column(Integer, ForeignKey('subscription.id'), nullable=False)
+    total_price = db.Column(Float, nullable=False)
+    payment_method = db.Column(String, nullable=False)
+    status = db.Column(Boolean, nullable=False)

@@ -1,8 +1,10 @@
-from flask import request, jsonify
 from . import app
 from services.userService import UserService
+from flask import Blueprint, request, jsonify
 
-@app.route('/users', methods=['POST'])
+user_bp = Blueprint('user_bp', __name__)
+
+@user_bp.route('/users', methods=['POST'])
 def create_user():
     data = request.json
     result = UserService.create_user(
@@ -17,7 +19,7 @@ def create_user():
     )
     return jsonify(result)
 
-@app.route('/users', methods=['GET'])
+@user_bp.route('/users', methods=['GET'])
 def get_all_users():
     try:
         users = UserService.get_all_users()
@@ -25,12 +27,12 @@ def get_all_users():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-@app.route('/users/<int:user_id>', methods=['GET'])
+@user_bp.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     result = UserService.get_user(user_id)
     return jsonify(result)
 
-@app.route('/users/<int:user_id>', methods=['PUT'])
+@user_bp.route('/users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     data = request.json
     result = UserService.update_user(
@@ -46,7 +48,7 @@ def update_user(user_id):
     )
     return jsonify(result)
 
-@app.route('/users/<int:user_id>', methods=['DELETE'])
+@user_bp.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     result = UserService.delete_user(user_id)
     return jsonify(result)
