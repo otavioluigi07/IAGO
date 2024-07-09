@@ -44,10 +44,10 @@ const Banner = () => {
         Lorem Ipsum is simply dummy text of the printing and types printing and <br></br>typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
         <div className="mt-10">
-            <button className="bg-white hover:shadow-2xl hover:shadow-white text-black font-bold py-2 px-4 sm:px-14 rounded-full transform sm:w-auto sm:h-auto shadow-white shadow-md">
+            <button className="bg-white hover:shadow-2xl hover:shadow-white text-black font-bold py-2 px-4 sm:px-14 rounded-full transform sm:w-auto sm:h-auto">
                 Contato
             </button>
-            <button className="ml-4 mt-10 bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-4 sm:px-14 rounded-full transform sm:w-auto sm:h-auto shadow-[#7000FF] shadow-md hover:shadow-2xl hover:shadow-[#7000FF]">
+            <button className="ml-4 mt-10 bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-4 sm:px-14 rounded-full transform sm:w-auto sm:h-auto hover:shadow-2xl hover:shadow-[#7000FF]">
                 Serviços
             </button>
         </div>
