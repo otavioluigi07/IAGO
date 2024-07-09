@@ -1,9 +1,12 @@
-import Navbar from '../components/Navbar'
+import Banner from "@components/Banner"
+import Navbar from "@components/Navbar"
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="bg-[#3A338E20]">
       <Navbar />
+      <Banner />
+
     </div>
   )
 }
