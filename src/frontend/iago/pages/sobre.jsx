@@ -7,7 +7,7 @@ import computador from '../assets/computador.svg';
 
 export default function Sobre() {
   return (
-    <div className="bg-[#3A338E20]">
+    <div className="bg-[#3A338E30]">
       <Navbar />
       <div className="pt-20">
         <div className="p-10 text-center sm:text-left">
