@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import planos from '../assets/planos.png';
+import Personalizados from '@components/Personalizado';
 
 export default function Planos() {
   return (
@@ -31,6 +32,13 @@ export default function Planos() {
             Assinar Bronze
           </button>
         </div>
+
+      <Personalizados />
+      
+
+
+
+
       </div>
       <Footer />
     </div>
