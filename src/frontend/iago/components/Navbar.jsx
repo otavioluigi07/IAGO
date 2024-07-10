@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="p-4 fixed w-full z-50 font-text">
+    <div className="p-4 fixed w-full z-50 font-text">
       <div className="flex justify-between items-center">
         <div className="flex-1">
           <Link href="/">
@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link href="/" className='hover:text-purple-500'>Menu</Link>
           <Link href="/ourpurpose" className='hover:text-purple-500'>Serviços</Link>
           <Link href="/partners" className='hover:text-purple-500'>Contato</Link>
-          <Link href="/media" className='hover:text-purple-500'>Sobre</Link>
+          <Link href="/sobre" className='hover:text-purple-500'>Sobre</Link>
           <Link href="/contactus" className='hover:text-purple-500'>Planos</Link>
           <Link href="/contactus" className='text-purple-500 font-bold text-xl'>Cadastrar</Link>
 
@@ -40,7 +40,7 @@ const Navbar = () => {
 
         </div>
       )}
-    </nav>
+    </div>
   );
 };
 
