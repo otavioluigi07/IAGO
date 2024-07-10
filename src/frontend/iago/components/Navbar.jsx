@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="md:flex hidden flex-1 justify-around text-white font-light text-lg">
           <Link href="/" className='hover:text-purple-500'>Menu</Link>
           <Link href="/ourpurpose" className='hover:text-purple-500'>Serviços</Link>
-          <Link href="/partners" className='hover:text-purple-500'>Contato</Link>
+          <Link href="/contato" className='hover:text-purple-500'>Contato</Link>
           <Link href="/sobre" className='hover:text-purple-500'>Sobre</Link>
           <Link href="/planos" className='hover:text-purple-500'>Planos</Link>
           <Link href="/contactus" className='text-purple-500 font-bold text-xl'>Cadastrar</Link>
@@ -33,7 +33,7 @@ const Navbar = () => {
         <div className="flex flex-col items-center md:hidden bg-black bg-opacity-80">
           <Link href="/"><p className="text-white py-2">Menu</p></Link>
           <Link href="/ourpurpose"><p className="text-white py-2">Serviços</p></Link>
-          <Link href="/partners"><p className="text-white py-2">Contato</p></Link>
+          <Link href="/contato"><p className="text-white py-2">Contato</p></Link>
           <Link href="/media"><p className="text-white py-2">Sobre</p></Link>
           <Link href="/planos"><p className="text-white py-2">Planos</p></Link>
           <Link href="/contactus"><p className="text-purple-500 font-bold px-4 py-2 rounded-md text-sm">Cadastrar</p></Link>

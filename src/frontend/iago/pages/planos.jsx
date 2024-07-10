@@ -6,7 +6,7 @@ import Personalizados from '@components/Personalizado';
 
 export default function Planos() {
   return (
-    <div className="bg-[#3A338E30]">
+    <div className="bg-[#3A338E40]">
       <Navbar />
       <div className='pt-20 p-10'>
         <h1 className='text-4xl mt-14'>Planos</h1>
