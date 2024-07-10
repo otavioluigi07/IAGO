@@ -1,8 +1,6 @@
-// components/Banner.jsx
 import Image from 'next/image';
 import banner from '../assets/banner.png';
 import mulher from '../assets/mulher.svg';
-
 
 const Banner = () => {
   return (
@@ -19,7 +17,7 @@ const Banner = () => {
         .banner-container {
           position: relative;
           width: 100%;
-          height: 605px; /* Defina a altura desejada para o banner */
+          height: 605px; /* Altura padrão para telas grandes */
           overflow: hidden;
         }
 
@@ -31,8 +29,22 @@ const Banner = () => {
           height: 100%;
         }
 
-        .highlight-text {
-          color: #7000FF; /* Cor magenta para destacar */
+        @media (max-width: 1024px) {
+          .banner-container {
+            height: 600px; /* Aumenta a altura em telas médias */
+          }
+        }
+
+        @media (max-width: 768px) {
+          .banner-container {
+            height: 600px; /* Aumenta a altura em telas pequenas */
+          }
+        }
+
+        @media (max-width: 640px) {
+          .banner-container {
+            height: 750px; /* Aumenta a altura em telas extra pequenas */
+          }
         }
       `}</style>
       <div className='mt-52'>
@@ -41,18 +53,19 @@ const Banner = () => {
           além da <span className="text-purple-500">artificial</span>
         </h1>
         <p className='mt-10 pr-10'>
-        Lorem Ipsum is simply dummy text of the printing and types printing and <br></br>typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum is simply dummy text of the printing and types printing and <br></br>
+          typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
         <div className="mt-10">
-            <button className="bg-white hover:shadow-2xl hover:shadow-white text-black font-bold py-2 px-4 sm:px-14 rounded-full transform sm:w-auto sm:h-auto">
-                Contato
-            </button>
-            <button className="ml-4 mt-10 bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-4 sm:px-14 rounded-full transform sm:w-auto sm:h-auto hover:shadow-2xl hover:shadow-[#7000FF]">
-                Serviços
-            </button>
+          <button className="mr-4 bg-white hover:shadow-2xl hover:shadow-white text-black font-bold py-2 px-12 sm:px-20  rounded-full transform sm:w-auto sm:h-auto">
+            Contato
+          </button>
+          <button className="mt-10 bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-12 sm:px-20  rounded-full transform sm:w-auto sm:h-auto hover:shadow-2xl hover:shadow-[#7000FF]">
+            Serviços
+          </button>
         </div>
 
-        <div className="absolute bottom-0 right-0">
+        <div className="absolute bottom-0 right-0 hidden lg:block">
           <Image
             src={mulher}
             alt="Mulher"
@@ -60,12 +73,7 @@ const Banner = () => {
             height={600} // Defina a altura da imagem conforme necessário
           />
         </div>
-
-
       </div>
-
-
-
     </div>
   );
 };

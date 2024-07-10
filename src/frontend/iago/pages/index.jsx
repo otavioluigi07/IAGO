@@ -4,6 +4,7 @@ import Servicos from "@components/Servicos"
 import Ferramentas from "@components/Ferramentas"
 import Sobre from "@components/Sobre"
 import Planos from "@components/Planos"
+import Footer from "@components/Footer"
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Ferramentas />
       <Sobre />
       <Planos />
+      <Footer />
 
     </div>
   )
