@@ -21,7 +21,7 @@ const Navbar = () => {
           <Link href="/contato" className='hover:text-purple-500'>Contato</Link>
           <Link href="/sobre" className='hover:text-purple-500'>Sobre</Link>
           <Link href="/planos" className='hover:text-purple-500'>Planos</Link>
-          <Link href="/contactus" className='text-purple-500 font-bold text-xl'>Cadastrar</Link>
+          <Link href="/login" className='text-purple-500 font-bold text-xl'>Login</Link>
 
         </div>
         <button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -35,7 +35,7 @@ const Navbar = () => {
           <Link href="/contato"><p className="text-white py-2">Contato</p></Link>
           <Link href="/media"><p className="text-white py-2">Sobre</p></Link>
           <Link href="/planos"><p className="text-white py-2">Planos</p></Link>
-          <Link href="/contactus"><p className="text-purple-500 font-bold px-4 py-2 rounded-md text-sm">Cadastrar</p></Link>
+          <Link href="/login"><p className="text-purple-500 font-bold px-4 py-2 rounded-md text-sm">Login</p></Link>
 
         </div>
       )}

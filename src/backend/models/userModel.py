@@ -7,6 +7,7 @@ class User(db.Model):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String)
     email = db.Column(String, unique=True)
+    password = db.Column(String)
     occupation = db.Column(String)
     cell = db.Column(String)
     age = db.Column(Integer)
@@ -18,6 +19,7 @@ class User(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'password': self.password,
             'email': self.email,
             'occupation': self.occupation,
             'cell': self.cell,

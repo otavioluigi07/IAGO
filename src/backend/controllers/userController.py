@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from services.userService import UserService
+from flask_cors import CORS
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -9,12 +10,13 @@ def create_user():
     result = UserService.create_user(
         name=data.get('name'),
         email=data.get('email'),
+        password=data.get('password'),
         occupation=data.get('occupation'),
         cell=data.get('cell'),
         age=data.get('age'),
         gender=data.get('gender'),
-        subscription_id=data.get('subscription_id'),
-        role=data.get('role')
+        subscription_id=1,
+        role="user"
     )
     return jsonify(result)
 
@@ -38,6 +40,7 @@ def update_user(user_id):
         user_id,
         name=data.get('name'),
         email=data.get('email'),
+        password=data.get('password'),
         occupation=data.get('occupation'),
         cell=data.get('cell'),
         age=data.get('age'),
@@ -50,5 +53,14 @@ def update_user(user_id):
 @user_bp.route('/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     result = UserService.delete_user(user_id)
+    return jsonify(result)
+
+@user_bp.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    result = UserService.login(
+        email=data.get('email'),
+        password=data.get('password')),
+
     return jsonify(result)
 

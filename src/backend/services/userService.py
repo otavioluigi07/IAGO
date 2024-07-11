@@ -1,14 +1,20 @@
 from sqlalchemy.exc import SQLAlchemyError
 from models.userModel import User
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+
 
 class UserService:
     @staticmethod
-    def create_user(name, email, occupation, cell, age, gender, subscription_id, role):
+    def create_user(name, email, password, occupation, cell, age, gender, subscription_id, role):
         from database.database import db  # Importação localizada
         try:
+            hashed_password = generate_password_hash(password)
+
             new_user = User(
                 name=name,
                 email=email,
+                password=hashed_password,
                 occupation=occupation,
                 cell=cell,
                 age=age,
@@ -45,13 +51,14 @@ class UserService:
             return {"error": str(e)}
 
     @staticmethod
-    def update_user(user_id, name, email, occupation, cell, age, gender, subscription_id, role):
+    def update_user(user_id, name, email, password, occupation, cell, age, gender, subscription_id, role):
         from database.database import db  # Importação localizada
         try:
             user = User.query.get(user_id)
             if user:
                 user.name = name
                 user.email = email
+                user.password = password
                 user.occupation = occupation
                 user.cell = cell
                 user.age = age
@@ -75,6 +82,25 @@ class UserService:
                 db.session.delete(user)
                 db.session.commit()
                 return {"message": "User deleted successfully"}
+            else:
+                return {"error": "User not found"}
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            return {"error": str(e)}
+        
+    @staticmethod
+    def login(email, password):
+        from database.database import db
+        try:
+            # Busca o usuário pelo email
+            user = db.session.query(User).filter_by(email=email).first()
+
+            if user:
+                # Verifica a senha
+                if check_password_hash(user.password, password):
+                    return {"message": "Login successful"}
+                else:
+                    return {"error": "Invalid password"}
             else:
                 return {"error": "User not found"}
         except SQLAlchemyError as e:
