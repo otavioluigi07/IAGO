@@ -90,6 +90,8 @@ const Formularioperfil = () => {
   };
 
   const handleLogout = () => {
+    // Redirecionar para a página inicial
+    router.push('/');
     // Limpar todos os cookies relevantes
     destroyCookie(null, 'name');
     destroyCookie(null, 'email');
@@ -100,8 +102,6 @@ const Formularioperfil = () => {
     destroyCookie(null, 'userID');
     destroyCookie(null, 'authenticated');
 
-    // Redirecionar para a página inicial
-    router.push('/');
   };
 
   return (
@@ -125,6 +125,7 @@ const Formularioperfil = () => {
               type="email"
               id="email"
               value={email}
+              readOnly 
               onChange={(e) => setEmail(e.target.value)}
               className="bg-[#7000FF21] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-4"
               required
@@ -171,16 +172,28 @@ const Formularioperfil = () => {
           </div>
           <div className="w-full sm:w-1/2 mt-4 sm:mt-0">
             <label htmlFor="genero" className="block font-medium text-white mb-4 text-xl">Gênero</label>
-            <input
-              type="text"
+            <select
               id="genero"
               value={genero}
               onChange={(e) => setGenero(e.target.value)}
               className="bg-[#7000FF21] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-4"
               required
-            />
+            >
+              <option value="">Selecione...</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Transgênero">Transgênero</option>
+              <option value="Gênero neutro">Gênero neutro</option>
+              <option value="Não-binário">Não-binário</option>
+              <option value="Agênero">Agênero</option>
+              <option value="Pangênero">Pangênero</option>
+              <option value="Genderqueer">Genderqueer</option>
+              <option value="Two-spirit">Two-spirit</option>
+              <option value="Prefiro não informar">Prefiro não informar</option>
+            </select>
           </div>
         </div>
+        </form>
 
         <div className="flex justify-end">
           <button
@@ -191,12 +204,11 @@ const Formularioperfil = () => {
           </button>
           <button
           onClick={handleLogout}
-          className="bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-12 sm:px-20 rounded-full transform sm:w-auto sm:h-auto shadow-md hover:shadow-2xl hover:shadow-[#7000FF]"
+          className="ml-4 bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-12 sm:px-20 rounded-full transform sm:w-auto sm:h-auto shadow-md hover:shadow-2xl hover:shadow-[#7000FF]"
           >
           Sair
         </button>
         </div>
-      </form>
     </div>
   );
 };

@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [authenticated, setAuthenticated] = useState(); // Estado para armazenar o status de autenticação
 
+  
   useEffect(() => {
     const cookies = parseCookies();
     const isAuthenticated = cookies['authenticated']; // Converte para booleano

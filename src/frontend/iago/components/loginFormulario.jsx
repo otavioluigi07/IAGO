@@ -17,6 +17,7 @@ const Loginformulario = () => {
       email: email,
       password: senha
     };
+    
 
     try {
       const response = await fetch('http://127.0.0.1:5000/user/login', {
@@ -28,12 +29,10 @@ const Loginformulario = () => {
       });
 
       if (response.ok) {
-        const { data, authenticated, id, name, email, occupation, cell, age, gender, subscription_id, role, password } = await response.json();
+        const [data, authenticated, id,  name, email, occupation, cell, age, gender, subscription_id, role, password] = await response.json();
         if (authenticated) {
           console.log(id);
           alert('Login bem-sucedido');
-
-          // Definir cookies
           setCookie(null, 'userEmail', email, {
             maxAge: 30 * 24 * 60 * 60,
             sameSite: 'strict',
@@ -71,11 +70,10 @@ const Loginformulario = () => {
           setCookie(null, 'name', name, {
             maxAge: 30 * 24 * 60 * 60,
           });
+    
 
           router.push('/perfil');
         } else {
-          console.log(senha)
-          console.log(password)
           setError('Email ou senha incorretos'); // Define erro aqui se a autenticação falhar
         }
       } else if (response.status === 401) {
@@ -100,7 +98,6 @@ const Loginformulario = () => {
           <Image src={logo} alt="Logo" width={200} height={180} />
         </div>
         <form className="space-y-6 text-white">
-          {error && <div className="text-red-500">{error}</div>} {/* Mostra mensagem de erro, se houver */}
           <div className="flex flex-col space-y-4">
             <div className="w-full">
               <label htmlFor="email" className="block font-medium text-white mb-4 text-xl">Email</label>
@@ -125,6 +122,7 @@ const Loginformulario = () => {
               />
             </div>
           </div>
+          {error && <p className="text-red-500">{error}</p>} {/* Exibe mensagem de erro se houver */}
           <div className="flex justify-center space-x-4">
             <button
               type="button"

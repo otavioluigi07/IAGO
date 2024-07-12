@@ -41,15 +41,15 @@ const Cadastroform = () => {
 
       if (response.ok) {
         alert("Cadastro realizado com sucesso!");
-        setCelular('')
-        setEmail('')
-        setGenero('')
-        setIdade('')
-        setIdade('')
-        setNome('')
-        setPassword('')
-        setPasswordC('')
-        setProfissao('')
+        // setCelular('')
+        // setEmail('')
+        // setGenero('')
+        // setIdade('')
+        // setIdade('')
+        // setNome('')
+        // setPassword('')
+        // setPasswordC('')
+        // setProfissao('')
       } else {
         alert("Erro ao realizar cadastro.");
       }
