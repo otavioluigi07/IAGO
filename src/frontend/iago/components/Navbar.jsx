@@ -1,11 +1,19 @@
-// components/Navbar.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { parseCookies } from 'nookies';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../assets/logo.svg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [authenticated, setAuthenticated] = useState(); // Estado para armazenar o status de autenticação
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    const isAuthenticated = cookies['authenticated']; // Converte para booleano
+    setAuthenticated(isAuthenticated);
+    console.log(isAuthenticated)
+  }, []);
 
   return (
     <div className="p-4 fixed w-full z-50 font-text">
@@ -21,13 +29,18 @@ const Navbar = () => {
           <Link href="/contato" className='hover:text-purple-500'>Contato</Link>
           <Link href="/sobre" className='hover:text-purple-500'>Sobre</Link>
           <Link href="/planos" className='hover:text-purple-500'>Planos</Link>
-          <Link href="/login" className='text-purple-500 font-bold text-xl'>Login</Link>
 
+          {authenticated ? (
+            <Link href="/perfil" className='text-purple-500 font-bold text-xl'>Perfil</Link>
+          ) : (
+            <Link href="/login" className='text-purple-500 font-bold text-xl'>Login</Link>
+          )}
         </div>
         <button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? '✖' : '☰'}
         </button>
       </div>
+
       {isOpen && (
         <div className="flex flex-col items-center md:hidden bg-black bg-opacity-80">
           <Link href="/"><p className="text-white py-2">Menu</p></Link>
@@ -35,8 +48,12 @@ const Navbar = () => {
           <Link href="/contato"><p className="text-white py-2">Contato</p></Link>
           <Link href="/media"><p className="text-white py-2">Sobre</p></Link>
           <Link href="/planos"><p className="text-white py-2">Planos</p></Link>
-          <Link href="/login"><p className="text-purple-500 font-bold px-4 py-2 rounded-md text-sm">Login</p></Link>
 
+          {authenticated ? (
+            <Link href="/perfil"><p className="text-purple-500 font-bold px-4 py-2 rounded-md text-sm">Perfil</p></Link>
+          ) : (
+            <Link href="/login"><p className="text-purple-500 font-bold px-4 py-2 rounded-md text-sm">Login</p></Link>
+          )}
         </div>
       )}
     </div>

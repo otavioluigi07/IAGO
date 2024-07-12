@@ -60,7 +60,9 @@ def login():
     data = request.json
     result = UserService.login(
         email=data.get('email'),
-        password=data.get('password')),
+        password=data.get('password')
+    )
 
-    return jsonify(result)
-
+    if "error" in result:
+        return jsonify(result), 401  # Retorna 401 Unauthorized para erros
+    return jsonify(result), 200  # Retorna 200 OK para sucesso

@@ -1,8 +1,21 @@
 import Image from 'next/image';
 import banner from '../assets/banner.png';
 import mulher from '../assets/mulher.svg';
+import { useState, useEffect } from 'react';
+import { parseCookies } from 'nookies';
 
 const Banner = () => {
+  const [userEmail, setEmail] = useState(''); // Estado para armazenar o userID
+
+  
+  useEffect(() => {
+    const cookies = parseCookies();
+    const userEmail = cookies['userEmail'];
+    const id = cookies['userID'];
+    setEmail(userEmail); // Armazena o userID no estado
+  }, []);
+
+
   return (
     <div className="banner-container px-10">
       <Image
@@ -53,6 +66,7 @@ const Banner = () => {
           além da <span className="text-purple-500">artificial</span>
         </h1>
         <p className='mt-10 pr-10'>
+          <h1>email: {userEmail}</h1>
           Lorem Ipsum is simply dummy text of the printing and types printing and <br></br>
           typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>

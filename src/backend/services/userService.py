@@ -98,10 +98,14 @@ class UserService:
             if user:
                 # Verifica a senha
                 if check_password_hash(user.password, password):
-                    return {"message": "Login successful"}
+                    authenticated = True
+                    return {"message": "Login successful"}, authenticated, user.id, user.name, user.email, user.occupation, user.cell, user.age,user.gender, user.subscription_id, user.role, user.password
+                
                 else:
-                    return {"error": "Invalid password"}
+                    authenticated = False
+                    return {"error": "Invalid password"}, authenticated
             else:
+                authenticated = False
                 return {"error": "User not found"}
         except SQLAlchemyError as e:
             db.session.rollback()

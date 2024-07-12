@@ -1,42 +1,25 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from "next/image";
-import Link from 'next/link';
 import logo from "../assets/logo.svg";
+import { setCookie } from 'nookies';
 
 const Loginformulario = () => {
   const [senha, setSenha] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState(''); // Estado para armazenar mensagens de erro
   const router = useRouter();
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Adicione a lógica de envio do formulário aqui
-  };
 
   const login = async (e) => {
     e.preventDefault();
 
-    if (password !== passwordC) {
-      alert("As senhas não coincidem!");
-      return;
-    }
-
     const userData = {
-      name: nome,
       email: email,
-      password: password,
-      occupation: profissao,
-      cell: celular,
-      age: idade,
-      gender: genero,
-      subscription_id: 1,
-      role: "user"
+      password: senha
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/user/', {
+      const response = await fetch('http://127.0.0.1:5000/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -45,17 +28,69 @@ const Loginformulario = () => {
       });
 
       if (response.ok) {
-        alert("Cadastro feito com sucesso!");
+        const { data, authenticated, id, name, email, occupation, cell, age, gender, subscription_id, role, password } = await response.json();
+        if (authenticated) {
+          console.log(id);
+          alert('Login bem-sucedido');
 
+          // Definir cookies
+          setCookie(null, 'userEmail', email, {
+            maxAge: 30 * 24 * 60 * 60,
+            sameSite: 'strict',
+          });
+          setCookie(null, 'userID', id, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'authenticated', true, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'email', email, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'occupation', occupation, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'cell', cell, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'age', age, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'gender', gender, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'subscription_id', subscription_id, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'role', role, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'password', password, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+          setCookie(null, 'name', name, {
+            maxAge: 30 * 24 * 60 * 60,
+          });
+
+          router.push('/perfil');
+        } else {
+          console.log(senha)
+          console.log(password)
+          setError('Email ou senha incorretos'); // Define erro aqui se a autenticação falhar
+        }
+      } else if (response.status === 401) {
+        const data = await response.json();
+        setError(data.error); // Define o erro recebido do servidor
       } else {
-        alert("Email ou senha inválidos.");
+        setError('Ocorreu um erro inesperado. Por favor, tente novamente.');
       }
     } catch (error) {
-      alert("Erro ao efetuar o login: " + error);
+      setError('Erro na comunicação com o servidor. Por favor, tente novamente.');
     }
   };
+
   const handleCadastroClick = () => {
-    router.push('/cadastro'); 
+    router.push('/cadastro');
   };
 
   return (
@@ -64,7 +99,8 @@ const Loginformulario = () => {
         <div className="flex justify-center mb-8">
           <Image src={logo} alt="Logo" width={200} height={180} />
         </div>
-        <form onSubmit={handleSubmit} className="space-y-6 text-white">
+        <form className="space-y-6 text-white">
+          {error && <div className="text-red-500">{error}</div>} {/* Mostra mensagem de erro, se houver */}
           <div className="flex flex-col space-y-4">
             <div className="w-full">
               <label htmlFor="email" className="block font-medium text-white mb-4 text-xl">Email</label>
@@ -91,14 +127,14 @@ const Loginformulario = () => {
           </div>
           <div className="flex justify-center space-x-4">
             <button
-              type="submit"
+              type="button"
               onClick={handleCadastroClick}
               className="bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-12 sm:px-20 rounded-full transform sm:w-auto sm:h-auto shadow-md hover:shadow-2xl hover:shadow-[#7000FF]"
             >
               Cadastrar
             </button>
             <button
-              type="submit"
+              type="button"
               onClick={login}
               className="bg-gradient-to-r from-[#7000FF] to-[#998100] text-white font-bold py-2 px-12 sm:px-20 rounded-full transform sm:w-auto sm:h-auto shadow-md hover:shadow-2xl hover:shadow-[#7000FF]"
             >
