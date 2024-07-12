@@ -53,10 +53,10 @@ def formatar_texto(texto):
 
 # Access your API key as an environment variable.
 # Obtém a chave de API do ambiente
-api_key = os.getenv("API_KEY")
+# api_key = os.getenv("API_KEY")
 
 # Configura o genai com a chave de API
-genai.configure(api_key=api_key)
+# genai.configure(api_key=api_key)
 
 # Choose a model that's appropriate for your use case.
 model = genai.GenerativeModel('gemini-1.5-flash')
@@ -484,7 +484,7 @@ def run(estrutura_copycanvas, conceitos_auxiliares_copycanvas, elemento, element
     """
 
     response = model.generate_content(prompt)
-    return (formatar_texto(response))
+    return (response)
 
 
 # Exemplos de Audiência
@@ -979,7 +979,7 @@ def run_2(tipo_copy, instrucao_adicional, exemplos, exemplo_copy, novo_prompt, p
     Gere um uma copy seguindo esse copy canvas: {novo_prompt}
     """
     response = model.generate_content(prompt)
-    return (formatar_texto(response))
+    return (response)
 
 #Plataformas de uso:
 
@@ -2962,7 +2962,7 @@ def validador(copy):
     COPY que você deve analsiar: {copy}. 
     """
     response = model.generate_content(prompt)
-    return (formatar_texto(response))
+    return (response)
 
 
 #Lógica genérica:
@@ -2987,7 +2987,7 @@ def resultado(nota_copy):
     """
 
     response = model.generate_content(prompt)
-    return (formatar_texto(response))
+    return (response)
 
 
 def recriacao(tipo_copy, exemplos, exemplo_copy, novo_prompt, plataforma, politica, copy, nota_copy):
@@ -3029,7 +3029,7 @@ def recriacao(tipo_copy, exemplos, exemplo_copy, novo_prompt, plataforma, politi
     PERGUNTADO USUÁRIO:
     Gere um uma copy seguindo esse copy canvas: {novo_prompt}"""
     response = model.generate_content(prompt)
-    return (formatar_texto(response))
+    return (response)
 
 
 def rodar(criativo):
