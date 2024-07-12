@@ -22,34 +22,6 @@ def formatar_texto(texto):
     # Junta todas as linhas novamente em um único texto
     return '\n'.join(texto_formatado)
 
-# import boto3
-
-# # Configurar a sessão com as credenciais
-# session = boto3.Session(
-#     aws_access_key_id='ASIAQIZ2SGMN5HRB5R7Y',
-#     aws_secret_access_key='ZAPJb3ntePCOq0nMv04W/KPiEKqznNj9dvVrGpan',
-#     aws_session_token = 'IQoJb3JpZ2luX2VjEK7//////////wEaCXVzLWVhc3QtMSJIMEYCIQC+ghvPPFrCzPQC4N1VfZ0StZm0Dga3l5CHRmOnhNl3HQIhAKvluhOmyI29UYIbm+KWr/FDrdS3g1ssz9Z1xAe5eRMUKqQDCHYQAhoMMDE4OTEzMzA5NDY3Igxc2jPmyM07FnNDuEcqgQM+l4DL/ARCG+Q9Z4lC6kNnDH8Jph29D84o5aJfRQrjDPvaVxlWuY2/P6VHPeuqgcBT40fLhymBx6rhMRUYaF88E2zBny7Sm+6ENNG/WoAMppdoO9mqZnCLddHdkqaatdEexowPdlUSvdLZeOMP2fGh/cdTHmFMwtWmrLYoQpe6fZ7M8CMs6RCk8FccuH2hYZtotVCuLE9c3tqpcP3PWVoS2sQK8WqkpNFAi+Eym9b4P4LeSJOnw5EiZyt/d8UTbJN/dRuAdeXwgfL1eADEAwaWkE6z72HGRCR1bW/evDW5v6Y2EShxG3a3pP8EbLg7vztB96LD3ZmdM/jCff0RDCLDIsLfp/tg35AwusXRMrCdJceDMvb3BtFiLSylarWROLvnWHftiH9kMlM+7sYevO9MLhbLnrmJJEfPv0qsOM2sM5Bh9fs3y948xGA2s86GlsFenSncLxVCTK2MC8jUryL6m+9FaAZV9needX9gfzRG6UwBsYX56NwQ97BRlZ4KZGECMPTTxLQGOqUBh2xgfVVkbrp7DnGwHKe3HUn+aUulGuXY6bXleNfUUyw7RNlLV8J/VmRUUU+kzao43X1dZTi+wlsG5vdHL56lJJ/ao22xf0813yEws3kkGj59jSFs7LJkZB27+TpIHL5jzx/mqEoYOVsy1boJDX9yr0kGEIEi6oqK7AAg05Y8jyz+BozKefinUAjra4/4lJ9vL1k4iD13ac5N9UyE3CVmISmlTWww',
-#     region_name='us-east-1'
-# )
-
-
-
-# Criar o cliente do serviço (substitua 'bedrock' pelo serviço que você está usando)
-# client = session.client('bedrock-runtime')
-
-# Configurar o ChatBedrock com as credenciais e o cliente
-# model = ChatBedrock(
-#     client=client,
-#     model_id="mistral.mistral-large-2402-v1:0",
-#     model_kwargs={"temperature": 0.9}
-# )
-
-# # Configurar o ChatBedrock com as credenciais e o cliente
-# model2 = ChatBedrock(
-#     client=client,
-#     model_id="mistral.mistral-large-2402-v1:0",
-#     model_kwargs={"temperature": 0.7}
-# )
 
 # Access your API key as an environment variable.
 # Obtém a chave de API do ambiente
