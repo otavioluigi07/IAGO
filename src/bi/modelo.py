@@ -1,10 +1,13 @@
 import google.generativeai as genai
+from dotenv import load_dotenv
 
 import re
 import textwrap
 
 import os
- 
+
+load_dotenv()
+
 def formatar_texto(texto):
     # Divide o texto em linhas para processar cada uma individualmente
     linhas = texto.split('\n')
@@ -49,7 +52,12 @@ def formatar_texto(texto):
 # )
 
 # Access your API key as an environment variable.
-genai.configure(api_key=os.environ['AIzaSyCoQHsn0c3eSbRIn_eUEsoj7DIYXPinJSs'])
+# Obtém a chave de API do ambiente
+api_key = os.getenv("API_KEY")
+
+# Configura o genai com a chave de API
+genai.configure(api_key=api_key)
+
 # Choose a model that's appropriate for your use case.
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -475,8 +483,7 @@ def run(estrutura_copycanvas, conceitos_auxiliares_copycanvas, elemento, element
     {criativo}
     """
 
-    response = model.generate_content(prompt=prompt,
-                                      temperature=0.9)
+    response = model.generate_content(prompt)
     return (formatar_texto(response))
 
 
@@ -971,8 +978,7 @@ def run_2(tipo_copy, instrucao_adicional, exemplos, exemplo_copy, novo_prompt, p
     PERGUNTA DO USUÁRIO:
     Gere um uma copy seguindo esse copy canvas: {novo_prompt}
     """
-    response = model.generate_content(prompt=prompt,
-                                      temperature=0.9)
+    response = model.generate_content(prompt)
     return (formatar_texto(response))
 
 #Plataformas de uso:
@@ -2955,8 +2961,7 @@ def validador(copy):
     PERGUNTA DO USUÁRIO:
     COPY que você deve analsiar: {copy}. 
     """
-    response = model.generate_content(prompt=prompt,
-                                      temperature=0.9)
+    response = model.generate_content(prompt)
     return (formatar_texto(response))
 
 
@@ -2981,8 +2986,7 @@ def resultado(nota_copy):
     Qual a letra(NOTA) da minha COPY?
     """
 
-    response = model.generate_content(prompt=prompt,
-                                        temperature=0.9)    
+    response = model.generate_content(prompt)
     return (formatar_texto(response))
 
 
@@ -3024,8 +3028,7 @@ def recriacao(tipo_copy, exemplos, exemplo_copy, novo_prompt, plataforma, politi
     
     PERGUNTADO USUÁRIO:
     Gere um uma copy seguindo esse copy canvas: {novo_prompt}"""
-    response = model.generate_content(prompt=prompt,
-                                      temperature=0.9)
+    response = model.generate_content(prompt)
     return (formatar_texto(response))
 
 
