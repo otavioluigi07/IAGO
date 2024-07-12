@@ -1,6 +1,8 @@
 import Navbar from "@components/Navbar"
 import Footer from "@components/Footer"
 import Usarspark from "@components/usarSpark"
+import Sparkformulario from "@components/sparkFormulario"
+import { SP } from "next/dist/shared/lib/utils"
 
 export default function Perfil() {
   return (
@@ -13,6 +15,7 @@ export default function Perfil() {
         <h1 className="text-[#7000FF] text-8xl mt-4">Spark</h1>
       </div>
       <Usarspark />
+      <Sparkformulario />
 
 
 

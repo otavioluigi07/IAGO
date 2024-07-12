@@ -8,7 +8,7 @@ const Servicos = () => {
   return (
     <div>
 
-      <div className="flex flex-wrap mt-10">
+      <div id = 'servico-section'className="flex flex-wrap mt-10">
         <div class="flex-1 bg-[#7000FF17] p-4 sm:mr-4 mr-0 mb-4 text-center ">
           <h2 className='text-xl'>
             Marketing digital

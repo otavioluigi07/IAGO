@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CopyIA</title>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .bottom {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CopyIA versão 2.0</h1>
+
+    <h2>Digite aqui seu CRIATIVO de negócio:</h2>
+    <div class="form-group">
+        <input type="text" id="inputValor" placeholder="Digite aqui seu criativo">
+    </div>
+
+    <h2>Sua resposta irá aparecer aqui: </h2>
+
+    <div class="form-group">
+        <button onclick="executarFuncao()">Gerar GUIA</button>
+    </div>
+    <p id="resultado"></p>
+
+    <h2>Digite aqui sua GUIA para a construção do COMUNICAÇÃO: </h2>
+    <div class="form-group">
+        <textarea id="guia" placeholder="Digite aqui sua GUIA" rows="20" cols="80"></textarea>
+    </div>
+    <br>
+    
+    <h2>Escolha o tipo da COMUNICAÇÃO:</h2>
+    <label for="exemplos">Tipo de comunicação:</label>
+    <select id="exemplos">
+        <option value="Email welcome">Email welcome</option>
+        <option value="Email warmup">Email Warmup</option>
+        <option value="Email promo">Email PROMO</option>
+        <option value="Email promo inicial">Email PROMO INICIAL</option>
+        <option value="Email promo ultima">Email PROMO ULTIMA</option>
+        <option value="zap aula">WhatsApp AULA</option>
+        <option value="zap carrinho">WhatsApp CARRINHO ABANDONADO</option>
+        <option value="zap countdown">WhatsApp COUNTDOWN</option>
+        <option value="zap cpl">WhatsApp CPL</option>
+        <option value="zap pos cpl">WhatsApp POS CPL</option>
+        <option value="zap lembrete">WhatsApp LEMBRETE</option>
+        <option value="zap vsl">WhatsApp VSL</option>
+        <option value="zap pos vsl">WhatsApp POS VSL</option>
+        <option value="instagram">Instagram PROMO</option>
+        <option value="instagram carrosel">Instagram CARROSSEL</option>
+        <option value="instagram reels">Instagram REELS</option>
+        <option value="telegram">Telegram PROMO</option>
+    </select><br>
+
+    <button onclick="gerarCopy()" class="bottom">Gerar COMUNICAÇÃO</button>
+    <br>
+    <h2>Sua COMUNICAÇÃO irá aparecer aqui:</h2>
+
+    <p id="copy"></p>
+
+    <script>
+        let resultadoFuncao = '';
+
+        function executarFuncao() {
+            var inputValor = document.getElementById("inputValor").value;
+            alert('Por favor, aguarde a geração da sua GUIA.');
+            fetch('/executar-funcao?parametro=' + inputValor)  // Chama a rota Flask com o parâmetro
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultado").innerHTML = data.retorno;
+                    resultadoFuncao = data.retorno;  // Armazena o resultado em uma variável global
+                });
+        }
+
+        function gerarCopy() {
+            const novo_prompt = document.getElementById("guia").value;
+            const tipo_comunicacao = document.getElementById("exemplos").value;
+
+            if (!novo_prompt) {
+                alert("Por favor, insira alguma GUIA");
+                return;
+            }
+
+            alert('Por favor, aguarde a geração da sua COMUNICAÇÃO.');
+            fetch('/gerar-copy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    novo_prompt,
+                    tipo_comunicacao
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("copy").innerHTML = data.retorno;
+            });
+        }
+    </script>
+</body>
+</html>

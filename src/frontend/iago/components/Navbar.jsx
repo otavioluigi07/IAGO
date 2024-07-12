@@ -26,7 +26,7 @@ const Navbar = () => {
         </div>
         <div className="md:flex hidden flex-1 justify-around text-white font-light text-lg">
           <Link href="/" className='hover:text-purple-500'>Menu</Link>
-          <Link href="/ourpurpose" className='hover:text-purple-500'>Serviços</Link>
+          <Link href="/#servico-section" className='hover:text-purple-500'>Serviços</Link>
           <Link href="/contato" className='hover:text-purple-500'>Contato</Link>
           <Link href="/sobre" className='hover:text-purple-500'>Sobre</Link>
           <Link href="/planos" className='hover:text-purple-500'>Planos</Link>

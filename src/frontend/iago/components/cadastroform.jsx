@@ -50,6 +50,8 @@ const Cadastroform = () => {
         // setPassword('')
         // setPasswordC('')
         // setProfissao('')
+        router.push('/login');
+
       } else {
         alert("Erro ao realizar cadastro.");
       }
